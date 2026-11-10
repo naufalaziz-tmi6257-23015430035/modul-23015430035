@@ -1,0 +1,6 @@
+SELECT b.kode, b.nama
+FROM barang b
+LEFT JOIN transaksi_keluar k 
+    ON k.id_barang = b.id
+WHERE k.id IS NULL
+ORDER BY b.kode;

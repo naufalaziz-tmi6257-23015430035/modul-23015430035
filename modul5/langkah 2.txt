@@ -1,0 +1,9 @@
+SELECT p.kode,
+       p.nama,
+       to_char(date_trunc('month', t.tanggal), 'YYYY-MM') AS bulan,
+       SUM(t.jumlah * t.harga_satuan) AS nilai_pembelian
+FROM transaksi_masuk t
+JOIN pemasok p ON p.id = t.id_pemasok
+GROUP BY p.kode, p.nama, date_trunc('month', t.tanggal)
+HAVING SUM(t.jumlah * t.harga_satuan) > 20000000
+ORDER BY bulan, nilai_pembelian DESC;
